@@ -41,6 +41,15 @@ config CHANNEL_DTB
           Only include Channel specific DTBs to limit the number that
           get built during kernel compilation.
 
+
+config HANNAH_DTB
+        depends on ARCH_QCOM
+        default n
+        bool "Hannah DTBs"
+        help
+          Only include Hannah specific DTBs to limit the number that
+          get built during kernel compilation.
+
 config SURFNA_DTB
         depends on ARCH_QCOM
         default n

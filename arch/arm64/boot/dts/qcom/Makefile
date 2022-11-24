@@ -9,6 +9,9 @@ DTC_FLAGS += -p 1024
 
 dtbo-$(CONFIG_ALI_DTB) += sdm450-ali-evt-overlay.dtbo
 
+dtb-$(CONFIG_HANNAH_DTB) += \
+	msm8917-hannah-p0.dtb
+
 dtbo-$(CONFIG_RIVER_DTB) += \
 	sdm632-river-evt-overlay.dtbo \
 	sdm632-river-na-evt-overlay.dtbo \

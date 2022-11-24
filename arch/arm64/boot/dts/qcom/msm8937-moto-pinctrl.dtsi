@@ -9,6 +9,9 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  */
+
+/delete-node/ &spi7_cs0_active;
+
 &tlmm{
 	nfc_irq_default: nfc_irq_default {
 		config {
@@ -17,6 +20,7 @@
 			bias-pull-down;
 		};
 	};
+
 	nfc_ven_default: nfc_ven_default {
 		config {
 			pins = "gpio16";
@@ -25,6 +29,7 @@
 			output-low;
 		};
 	};
+
 	nfc_firm_default: nfc_firm_default {
 		config {
 			pins = "gpio130";
@@ -33,6 +38,7 @@
 			output-low;
 		};
 	};
+
 	i2c_3 {
 		i2c_3_active: i2c_3_active {
 			/* active state */
@@ -40,18 +46,21 @@
 				pins = "gpio10", "gpio11";
 				function = "blsp_i2c3";
 			};
+
 			config {
 				pins = "gpio10", "gpio11";
 				drive-strength = <2>;
 				bias-disable;
 			};
 		};
+
 		i2c_3_sleep: i2c_3_sleep {
 			/* suspended state */
 			mux {
 				pins = "gpio10", "gpio11";
 				function = "blsp_i2c3";
 			};
+
 			config {
 				pins = "gpio10", "gpio11";
 				drive-strength = <2>;
@@ -59,23 +68,28 @@
 			};
 		};
 	};
+
 	touch_reset_n {
 		/*label = "touch-reset";*/
+
 		touch_reset_default: default {
 			mux {
 				pins = "gpio64";
 				function = "gpio";
 			};
+
 			config {
 				pins = "gpio64";
 				output-low;
 			};
 		};
+
 		touch_reset_active: active {
 			mux {
 				pins = "gpio64";
 				function = "gpio";
 			};
+
 			config {
 				pins = "gpio64";
 				drive-strength = <2>;   /* 2 mA */
@@ -83,23 +97,28 @@
 			};
 		};
 	};
+
 	touch_int_n {
 		/*label = "touch-int";*/
+
 		touch_int_default: default {
 			mux {
 				pins = "gpio65";
 				function = "gpio";
 			};
+
 			config {
 				pins = "gpio65";
 				bias-disable;
 			};
 		};
+
 		touch_int_active: active {
 			mux {
 				pins = "gpio65";
 				function = "gpio";
 			};
+
 			config {
 				pins = "gpio65";
 				drive-strength = <2>;
@@ -107,12 +126,14 @@
 			};
 		};
 	};
+
 	sx9310 {
 		sx9310_int_default: default {
 			    mux {
 				    pins = "gpio31";
 				    function = "gpio";
 			    };
+
 			    config {
 				    pins = "gpio31";
 				    drive-strength = <2>;
@@ -121,6 +142,7 @@
 			    };
 		    };
 	};
+
 	ltr559_int_pin {
 		ltr559_default: ltr559_default {
 			mux {
@@ -145,23 +167,27 @@
 		      };
 	      };
 	};
+
 	tlmm_gpio_key {
 		gpio_key_active: gpio_key_active {
 			mux {
 				pins = "gpio91";
 				function = "gpio";
 			};
+
 			config {
 				pins = "gpio91";
 				drive-strength = <2>;
 				bias-pull-up;
 			};
 		};
+
 		gpio_key_suspend: gpio_key_suspend {
 			mux {
 				pins = "gpio91";
 				function = "gpio";
 			};
+
 			config {
 				pins = "gpio91";
 				drive-strength = <2>;
@@ -169,6 +195,7 @@
 			};
 		};
 	};
+
 	usb_id_pin {
 		usbid_default: default {
 			mux {
@@ -195,7 +222,6 @@
 	};
 
 	spi_7 {
-		/delete-node/ cs0_active;
 		/* BLSP7 MOSI, MISO, CLK */
 		spi_7_active: spi_7_active {
 			/* active state */
@@ -210,6 +236,7 @@
 				bias-disable; /* No PULL */
 			};
 		};
+
 		spi_7_sleep:spi_7_sleep {
 			mux {
 				/* MOSI, MISO, CLK */
@@ -222,8 +249,8 @@
 				bias-pull-down; /* PULL Down */
 			};
 		};
+
 		spi7_cs0_active: spi7_cs0_active {
-			/* CS */
 			mux {
 				pins = "gpio87";
 				function = "blsp_spi7";
@@ -234,6 +261,7 @@
 				bias-disable;
 			};
 		};
+
 		spi7_cs0_sleep: spi7_cs0_sleep {
 			/* CS */
 			mux {
@@ -247,6 +275,33 @@
 			};
 		};
 	};
+
+	/* DTV ldo enable and ant Switch pin */
+	dtv_output_default: dtv-enable-ant {
+		mux {
+			/* enable, reset */
+			pins = "gpio94", "gpio96";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio94", "gpio96";
+			drive-strength = <2>; /* 2 MA */
+			bias-disable ; /* No PULL */
+			output-low;
+		};
+	};
+	/* DTV interrupt pin */
+	dtv_input_default: dtv-irq-default {
+			mux {
+				pins = "gpio50";
+				function = "gpio";
+			};
+			config {
+				pins = "gpio50";
+				bias-pull-up; /* pull up */
+			};
+	};
+
 	/delete-node/ pri-tlmm-lines;
 	pri-tlmm-lines {
 		pri_tlmm_lines_act: pri_tlmm_lines_act {
@@ -254,16 +309,19 @@
 				pins = "gpio85", "gpio86", "gpio88";
 				function = "pri_mi2s";
 			};
+
 			config {
 				pins = "gpio85", "gpio86", "gpio88";
 				drive-strength = <8>;
 			};
 		};
+
 		pri_tlmm_lines_sus: pri_tlmm_lines_sus {
 			mux {
 				pins = "gpio85", "gpio86", "gpio88";
 				function = "pri_mi2s";
 			};
+
 			config {
 				pins = "gpio85", "gpio86", "gpio88";
 				drive-strength = <2>;
